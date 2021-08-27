@@ -3,7 +3,7 @@ package com.demo.dto;
 public enum GameStatus {
     IN_PROGRESS("Roll a die! Your game continues."),
     WIN("Congratulations! You have just won a game. It was a pleasure to play with you."),
-    LOSE("You lost the game. Come back later and show your skill.");
+    LOSE("Almost done. Roll a die again.");
 
     private final String statusDescription;
 
