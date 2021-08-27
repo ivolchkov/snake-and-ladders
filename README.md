@@ -13,7 +13,7 @@ So that there is an element of chance in the game.
 As a player  
 I want to be able to win the game  
 So that I can gloat to everyone around.
-##Prerequisites
+## Prerequisites
 - Maven;
 - MySQL;
 - Lombok;
@@ -23,7 +23,7 @@ So that I can gloat to everyone around.
 - Spring Boot;
 - Spring Data;
 - Spring MVC.
-##How to run the project
+## How to run the project
 1. Make sure you have already installed JDK 11, Maven, MySQL server;
 2. Clone the project to your local folder;
 3. Create a schema called ```snake_and_ladders``` in your database;
