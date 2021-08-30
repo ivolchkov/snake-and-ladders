@@ -18,6 +18,9 @@ import java.util.Random;
 @Log4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class DefaultTokenService implements TokenService {
+    private static final int TABLE_SIZE = 100;
+    private static final int MIN_DICE_ROLL_NUMBER = 1;
+    private static final int MAX_DICE_ROLL_NUMBER = 6;
     private static final int MIN_BOUND = 1;
     private static final int MAX_BOUND = 5;
     private static final String ID_ERROR_MESSAGE = "Id is invalid.";
@@ -61,10 +64,10 @@ public class DefaultTokenService implements TokenService {
     private TokenDTO updateTokenState(TokenEntity entity, int newPosition) {
         GameStatus gameStatus;
 
-        if (newPosition == 100) {
+        if (newPosition == TABLE_SIZE) {
             gameStatus = GameStatus.WIN;
             entity.setCurrentPosition(newPosition);
-        } else if (newPosition > 100) {
+        } else if (newPosition > TABLE_SIZE) {
             gameStatus = GameStatus.LOSE;
         } else {
             gameStatus = GameStatus.IN_PROGRESS;
@@ -75,7 +78,7 @@ public class DefaultTokenService implements TokenService {
     }
 
     private void validateDiceRollRange(Integer diceRollNumber) {
-        if (diceRollNumber < 1 || diceRollNumber > 6) {
+        if (diceRollNumber < MIN_DICE_ROLL_NUMBER || diceRollNumber > MAX_DICE_ROLL_NUMBER) {
             log.warn("Dice roll number is out of range. It should be greater than zero and less than seven. Current value: " + diceRollNumber);
             throw new IllegalArgumentException(DICE_ROLL_NUMBER_ERROR_MESSAGE);
         }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TokenController {
-    private final TokenService tokenService;
+    private static final int INITIAL_TOKEN_POSITION = 1;
 
-    @GetMapping("/startGame")
-    public ResponseEntity<TokenDTO> startGame() {
-        return ResponseEntity.ok(tokenService.create(new TokenDTO(1)));
-    }
+    private final TokenService tokenService;
 
     @GetMapping("/rollADie")
     public ResponseEntity<Integer> rollADie() {
         return ResponseEntity.ok(tokenService.generateRollNumber());
+    }
+
+    @PostMapping("/startGame")
+    public ResponseEntity<TokenDTO> startGame() {
+        return ResponseEntity.ok(tokenService.create(new TokenDTO(INITIAL_TOKEN_POSITION)));
     }
 
     @PutMapping("/{id}/{diceRollNumber}")
